@@ -27,32 +27,24 @@ PhpStorm Live Template
 ```php
 <?php
 
-namespace ${MODULE_PROVIDER_CAMMAL_CASE}\\${MODULE_CODE_CAMMAL_CASE}\Migration\SmartProcess;
+/** @bxnolanginspection */
+
+namespace ${MODULE_PROVIDER_CAMMAL_CASE}\\${MODULE_CODE_CAMMAL_CASE}\Migration\DigitalWorkplace;
 
 
 use ${MODULE_PROVIDER_CAMMAL_CASE}\\${MODULE_CODE_CAMMAL_CASE}\Service\Container;
-use ${MODULE_PROVIDER_CAMMAL_CASE}\\${MODULE_CODE_CAMMAL_CASE}\Service\Migration\SmartProcess\MigrateSmartProcessEntity;
-use ${MODULE_PROVIDER_CAMMAL_CASE}\\${MODULE_CODE_CAMMAL_CASE}\Service\Migration\SmartProcess\MigrateSmartProcessService;
+use ${MODULE_PROVIDER_CAMMAL_CASE}\\${MODULE_CODE_CAMMAL_CASE}\Service\Migration\SmartProcessWorkspace\WorkspaceSmartProcessEntity;
+use ${MODULE_PROVIDER_CAMMAL_CASE}\\${MODULE_CODE_CAMMAL_CASE}\Service\SmartProcess\SmartProcessService;
 use Bitrix\Main\ObjectNotFoundException;
 use Bitrix\Main\SystemException;
 use Psr\Container\NotFoundExceptionInterface;
 use ReflectionException;
 
-class SmartProcessExample implements MigrateSmartProcessEntity
+class SmartProcessWorkspaceExample implements WorkspaceSmartProcessEntity
 {
-    public static function getName(): string
-    {
-        return 'ExampleName';
-    }
-
     public static function getTitle(): string
     {
-        return 'ExampleTitle';
-    }
-
-    public static function getCode(): string
-    {
-        return 'EXAMPLE_CODE';
+        return 'title';
     }
 
     /**
@@ -61,17 +53,15 @@ class SmartProcessExample implements MigrateSmartProcessEntity
      * @throws ReflectionException
      * @throws SystemException
      */
-    public static function getParams(): array
+    public static function getTypeIds(): array
     {
-        /** @var MigrateSmartProcessService ${DS}service */
-        ${DS}service = Container::get(MigrateSmartProcessService::SERVICE_CODE);
+        /** @var SmartProcessService ${DS}srvSmartProcess */
+        ${DS}srvSmartProcess = Container::get(SmartProcessService::SERVICE_CODE);
 
-        /** @var ParamsConstructor ${DS}config */
-        ${DS}config = ${DS}service->getParamsConstructor();
-
-        return ${DS}config
-            ->setIsUseInUserfieldEnabled()
-            ->getParamsInArray();
+        return [
+            ${DS}srvSmartProcess->getByName(SmartProcessOne::getName())->getTypeId(),
+            ${DS}srvSmartProcess->getByName(SmartProcessTwo::getName())->getTypeId(),
+        ];
     }
 }
 ```
