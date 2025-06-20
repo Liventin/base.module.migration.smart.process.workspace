@@ -1,4 +1,4 @@
-# base.module.migration.smart.process
+# base.module.migration.smart.process.workspace
 
 <table>
 <tr>
